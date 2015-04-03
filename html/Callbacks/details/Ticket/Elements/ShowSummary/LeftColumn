@@ -1,0 +1,31 @@
+<&| /Widgets/TitleBox, title => loc('Requestor Details'), 
+                title_href => RT->Config->Get('WebPath')."/Ticket/ModifyPeople.html?id=".$Ticket->Id, 
+                class => 'ticket-info-people' &>
+%# my $requestors = $Ticket->Requestors;
+% my $Users = $Ticket->Requestors->UserMembersObj(  );
+% while ( my $user = $Users->Next ) {
+
+<table border="0">
+ <tr>
+  <td class="labeltop">Name:</td><td class="value"><% $user->RealName %></td>
+  <td class="labeltop">User name:</td><td class="value"><% $user->Name %></td>
+ </tr>
+ <tr>
+  <td class="labeltop">Work phone:</td><td class="value"><% $user->WorkPhone %></td>
+  <td class="labeltop">Email:</td><td class="value"><% $user->EmailAddress %></td>  
+ </tr>
+ <tr>
+  <td class="labeltop">Organization:</td><td class="value"><% $user->Organization %></td>
+  <td class="labeltop">Address:</td><td class="value"><% $user->Address1 %><br /><% $user->Address2 %></td>
+ </tr>
+</table>
+
+% }
+
+
+          </&>
+
+<%ARGS>
+$Ticket => undef
+$Attachments => undef
+</%ARGS>
